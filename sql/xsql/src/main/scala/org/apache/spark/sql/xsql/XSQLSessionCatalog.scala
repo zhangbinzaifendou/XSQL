@@ -80,6 +80,8 @@ private[xsql] class XSQLSessionCatalog(
   val xsqlExternalCatalog =
     externalCatalogWithListener.unwrapped.asInstanceOf[XSQLExternalCatalog]
 
+  setCurrentDatabase(conf.getConf(XSQL_DEFAULT_DATASOURCE), conf.getConf(XSQL_DEFAULT_DATABASE))
+
   /**
    * Get default cluster.
    */
