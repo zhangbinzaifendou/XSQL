@@ -117,7 +117,6 @@ private[xsql] class XSQLExternalCatalog(conf: SparkConf, hadoopConf: Configurati
   private val setted: AtomicBoolean = new AtomicBoolean(false)
 
   setupAndInitMetadata
-  defaultDataSourceForCurrent
 
   /**
    * Parse yarn, data source and initialize meta data.
@@ -170,12 +169,6 @@ private[xsql] class XSQLExternalCatalog(conf: SparkConf, hadoopConf: Configurati
             (key.substring(dataSourceName.length + 1), value)
         }
       addDataSource(dataSourceName, infos, dataSourceName.equalsIgnoreCase(defaultSource))
-    }
-  }
-
-  private def defaultDataSourceForCurrent(): Unit = {
-    setWorkingDataSource(Option(conf.get(XSQL_DEFAULT_DATASOURCE))) {
-      setCurrentDatabase(conf.get(XSQL_DEFAULT_DATABASE))
     }
   }
 
